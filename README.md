@@ -1,1 +1,1 @@
-# Biomeddical-Data-Design-2023
+# Biomedical-Data-Design-2023
