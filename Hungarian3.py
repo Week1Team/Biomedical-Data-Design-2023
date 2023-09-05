@@ -130,7 +130,7 @@ def na2maxWeight(input):
     # 将Na转化为最低的rank，从而处理医生不输入某些hosptal排名的情况
     for i in range(len(input)):
         input[i][np.isnan(input[i])] = max(input[i])
-    #print('the nan-moved array is \n', input)
+    # print('the nan-moved array is \n', input)
     return(input)
 
 
