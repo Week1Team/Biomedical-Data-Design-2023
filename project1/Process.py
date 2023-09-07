@@ -1,8 +1,19 @@
+import sys
+
 import numpy as np
+# -This module provides several preprocess function.
+
+# -broadcast function broadcasts the ranking array according to the capacity of each hospital,
+#     so that each capacity is a single column.
+# -The algorithm use this method to convert the question to a classical 1-to-1 matching Hungarian algorithm
+# -broadcastBack function is used to convert the result in which each capacity is a single column,
+#     back to a result in which each hospital is a single column, so we can understand the match result
+
+# -na2maxWeight function convert na value to the equally lowest rank
+# -This function is used when some docters don't give ranks to all hospital.
 
 
 def broadcast(ranking, capacity):
-    # 将ranking根据hospital的capacity进行扩增，使每个capacity占一列
     new_ranking = np.zeros((1, ranking.shape[0]))
     hospital_list = np.zeros((1, ))
     for i in range(ranking.shape[1]):
@@ -18,9 +29,16 @@ def broadcast(ranking, capacity):
     return new_ranking, hospital_list
 
 
+def broadcastBack(result, hospital_list):
+    new_result = []
+    for i in result:
+        new_result.append(int(hospital_list[i] - 1))
+    return new_result
+
+
 def na2maxWeight(input):
-    # 将Na转化为最低的rank，从而处理医生不输入某些hosptal排名的情况
     for i in range(len(input)):
-        input[i][np.isnan(input[i])] = max(input[i])
+        if sum(np.isnan(input[i])) != 0:
+            input[i][np.isnan(input[i])] = input.shape[i] - 1
     # print('the nan-moved array is \n', input)
-    return(input)
+    return input

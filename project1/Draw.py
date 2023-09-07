@@ -1,4 +1,14 @@
 import numpy as np
+# -This module provides a drawlines function.
+# -Given an array with max matched-zero number, the drawlines function try to use the fewest lines to cover all zeros.
+
+# -The algorithm need this function to draw lines for the preparation of generating more zeros in next loop,
+#       when the max matched-zero number is fewer than the docters.
+
+# -The algorithm firstly marks the rows without matched-zero,
+#       then marks the columns of the unmatched-zeros in newly-marked rows,  (function draw_col),
+#       then marks the rows of the matched-zeros in newly-marked cols, (function draw_row),
+#       Finally, when no more columns or rows can be marked, draw all marked columns and unmarked rows.
 
 
 def draw_col(array, i, rows, cols, p):
